@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle"
+    >
+    <!--mau nen khoi -->
+    <solid android:color="#FF5722"></solid>
+    <size android:height="5dp"></size>
+    <size android:width="5dp"></size>
+
+    <!--corner bo goc-->
+    <corners android:topLeftRadius="100dp"
+        android:topRightRadius="100dp"></corners>
+
+    <!--stroke to vien, chia vien-->
+    <stroke></stroke>
+    <!--can le noi dung nam tren khoi shape-->
+    <padding></padding>
+
+    <!---->
+
+</shape>

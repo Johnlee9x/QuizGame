@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "170728334086",
+    "firebase_url": "https://quizgame-fcc54-default-rtdb.firebaseio.com",
+    "project_id": "quizgame-fcc54",
+    "storage_bucket": "quizgame-fcc54.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:170728334086:android:10477735c5b3f936967487",
+        "android_client_info": {
+          "package_name": "com.example.quizgame"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIfYELxE4mY2bzqw-ij5niJxHjHIGM4Jg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
