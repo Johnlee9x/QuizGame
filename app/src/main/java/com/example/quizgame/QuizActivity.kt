@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.quizgame.databinding.ActivityQuizPageBinding
@@ -45,13 +46,11 @@ class QuizActivity : AppCompatActivity() {
         showQuestion()
 
         viewBinding.btnNext.setOnClickListener {
-
             showQuestion()
         }
         viewBinding.txtA.setOnClickListener {
             userAns = "a"
             if(userAns == crans){
-                Log.d("txtA", "in if condition")
                 viewBinding.txtA.setBackgroundColor(Color.GREEN)
                 crNum++
                 viewBinding.txtNumcrt.text = crNum.toString()
@@ -139,14 +138,6 @@ class QuizActivity : AppCompatActivity() {
                     ansC = snapshot.child(qtNum.toString()).child("c").value.toString()
                     ansD = snapshot.child(qtNum.toString()).child("d").value.toString()
                     crans = snapshot.child(qtNum.toString()).child("ans").value.toString()
-                    Toast.makeText(this@QuizActivity, "Found", Toast.LENGTH_SHORT).show()
-
-                    Log.d("qtion", qtion)
-                    Log.d("answerA", ansA)
-                    Log.d("anserB", ansB)
-                    Log.d("anserC", ansC)
-                    Log.d("anserD", ansD)
-                    Log.d("crans", crans)
 
                     viewBinding.txtA.text = ansA
                     viewBinding.txtB.text = ansB
@@ -170,6 +161,13 @@ class QuizActivity : AppCompatActivity() {
                     dialogMsg.create().show()
                 }
                 qtNum++
+
+                viewBinding.progressBar.visibility = View.INVISIBLE
+                viewBinding.layoutProgressBar.visibility =View.INVISIBLE
+                viewBinding.layoutTime.visibility = View.VISIBLE
+                viewBinding.layoutQuestion.visibility = View.VISIBLE
+                viewBinding.layoutBtn.visibility = View.VISIBLE
+
             }
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
@@ -235,7 +233,6 @@ class QuizActivity : AppCompatActivity() {
             val userId = it.uid
             scoreDb.child("Scores").child(userId).child("correct").setValue(crNum)
             scoreDb.child("Scores").child(userId).child("wrong").setValue(numWrong).addOnSuccessListener {
-                Toast.makeText(this, "Ok", Toast.LENGTH_SHORT).show()
             }
             val intent = Intent(this@QuizActivity, ResultActivity::class.java)
             startActivity(intent)

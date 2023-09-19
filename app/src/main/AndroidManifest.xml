@@ -21,7 +21,8 @@
         </activity>
         <activity
             android:name=".QuizActivity"
-            android:exported="false">
+            android:exported="false"
+            android:theme="@style/Theme.QuizGame">
         </activity>
         <activity
             android:name=".ForgetPasswordActivity"
@@ -41,7 +42,6 @@
             android:name=".WelcomeActivity"
             android:exported="true"
             android:theme="@style/Theme.Home">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
