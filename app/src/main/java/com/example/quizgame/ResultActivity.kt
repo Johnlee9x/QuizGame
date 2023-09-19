@@ -22,8 +22,8 @@ class ResultActivity : AppCompatActivity() {
     private var database = FirebaseDatabase.getInstance()
 
     private var dataRef =database.reference.child("Scores")
-    val authen = FirebaseAuth.getInstance()
-    val userId = authen.currentUser!!.uid
+    private val authen = FirebaseAuth.getInstance()
+    private val userId = authen.currentUser!!.uid
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewBinding = ActivityResultBinding.inflate(layoutInflater)
@@ -49,9 +49,7 @@ class ResultActivity : AppCompatActivity() {
                     var numWrong = snapshot.child(userId).child("wrong").value.toString()
                     viewBinding.apply {
                         numCrt.text = num_Crt
-                        Log.d("numCrt", num_Crt)
                         numWrongans.text = numWrong
-                        Log.d("numWrong", numWrong)
                     }
                 }
                 else{

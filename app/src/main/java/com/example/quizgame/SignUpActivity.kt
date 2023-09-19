@@ -24,7 +24,6 @@ class SignUpActivity : AppCompatActivity() {
 
             signUpWithFirebase(email, password)
 
-            /*create user account*/
         }
     }
     fun signUpWithFirebase(email: String, password: String){
