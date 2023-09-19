@@ -1,10 +1,13 @@
 package com.example.quizgame
 
 import android.content.Intent
-
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.example.quizgame.databinding.SigninActivityBinding
@@ -19,6 +22,7 @@ import com.google.android.gms.tasks.Task
 class SignInActivity : AppCompatActivity() {
 
     private lateinit var binding: SigninActivityBinding
+
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
     lateinit var mGoogleSignInClient: GoogleSignInClient
     val Req_Code: Int = 123
@@ -28,7 +32,7 @@ class SignInActivity : AppCompatActivity() {
         binding = SigninActivityBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
+        changeTextGg()
         binding.btSignin.setOnClickListener {
 
             val email = binding.edtEmailInputSignin.text.toString()
@@ -38,7 +42,7 @@ class SignInActivity : AppCompatActivity() {
         }
 
         binding.signInButton.setOnClickListener{
-            signInGoogle()
+
         }
 
         binding.txtSignup.setOnClickListener {
@@ -56,7 +60,7 @@ class SignInActivity : AppCompatActivity() {
     private fun signInWithAccount(email: String, password: String){
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
             if(task.isSuccessful){
-                val intent: Intent = Intent(this@SignInActivity, HomePageActivity::class.java)
+                val intent = Intent(this@SignInActivity, HomePageActivity::class.java)
                 startActivity(intent)
                 finish()
             }
@@ -85,7 +89,6 @@ class SignInActivity : AppCompatActivity() {
             handleResult(task)
         }
     }
-
     private fun handleResult(completedTask: Task<GoogleSignInAccount>) {
         try {
             val account: GoogleSignInAccount? = completedTask.getResult(ApiException::class.java)
@@ -96,6 +99,7 @@ class SignInActivity : AppCompatActivity() {
             Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show()
         }
     }
+
 
     private fun UpdateUI(account: GoogleSignInAccount) {
         val credential = GoogleAuthProvider.getCredential(account.idToken, null)
@@ -120,6 +124,14 @@ class SignInActivity : AppCompatActivity() {
             finish()
         }
     }
+    private fun changeTextGg(){
+        val txtGg = binding.signInButton.getChildAt(0) as TextView
+        txtGg.text = "Continue with google"
+        txtGg.textSize = 16F
+        txtGg.setTextColor(Color.BLACK)
+
+    }
+
 
 
 }
