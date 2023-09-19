@@ -20,11 +20,6 @@
             android:exported="false">
         </activity>
         <activity
-            android:name=".UploadData"
-            android:exported="false">
-
-        </activity>
-        <activity
             android:name=".QuizActivity"
             android:exported="false">
         </activity>
@@ -56,11 +51,6 @@
             android:name=".SignInActivity"
             android:exported="false"
             android:theme="@style/Theme.QuizGame">
-        </activity>
-        <activity
-            android:name=".MainActivity"
-            android:exported="false">
-
         </activity>
 
     </application>

@@ -106,7 +106,7 @@ class SignInActivity : AppCompatActivity() {
     private fun firebasSignInWithGg(task: Task<GoogleSignInAccount>) {
         val account = task.getResult(ApiException::class.java)
         Toast.makeText(applicationContext,"Welcome to Quiz Game", Toast.LENGTH_SHORT ).show()
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, HomePageActivity::class.java)
         startActivity(intent)
         finish()
         firebaseGoogleAccount(account)
