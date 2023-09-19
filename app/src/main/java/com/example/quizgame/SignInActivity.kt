@@ -42,7 +42,7 @@ class SignInActivity : AppCompatActivity() {
         }
 
         binding.signInButton.setOnClickListener{
-
+            signInGoogle()
         }
 
         binding.txtSignup.setOnClickListener {
