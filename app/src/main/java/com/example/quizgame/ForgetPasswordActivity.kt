@@ -17,16 +17,21 @@ class ForgetPasswordActivity : AppCompatActivity() {
         binding = ActivityForgetPasswordBinding.inflate(layoutInflater)
         val view: View = binding.root
         setContentView(view)
-        getPasswrod()
+        binding.btFgotPassword.setOnClickListener {
+            val email = binding.edtInputFgotpass.text.toString()
+            getPassword(email)
+        }
 
     }
 
-    private fun getPasswrod() {
-        binding.btFgotPassword.setOnClickListener {
-            val email = binding.edtInputFgotpass.text.toString()
+    private fun getPassword(email: String) {
+        if(email.isBlank() || !email.endsWith("@gmail.com", false)){
+            Toast.makeText(this@ForgetPasswordActivity, "Email has to be ending with @gmail.com", Toast.LENGTH_SHORT).show()
+        }
+        else{
             authen.sendPasswordResetEmail(email).addOnCompleteListener {task ->
                 if(task.isSuccessful){
-                    Toast.makeText(this@ForgetPasswordActivity, "Passwors was sent to your email", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@ForgetPasswordActivity, "Password was sent to your email", Toast.LENGTH_SHORT).show()
                     finish()
                 }
                 else{

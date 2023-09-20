@@ -19,9 +19,9 @@ class ResultActivity : AppCompatActivity() {
 
     private lateinit var viewBinding: ActivityResultBinding
 
-    private var database = FirebaseDatabase.getInstance()
+    private lateinit var database: FirebaseDatabase
 
-    private var dataRef =database.reference.child("Scores")
+    private lateinit var dataRef : DatabaseReference
     private val authen = FirebaseAuth.getInstance()
     private val userId = authen.currentUser!!.uid
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,6 +42,8 @@ class ResultActivity : AppCompatActivity() {
     }
 
     private fun getResult() {
+        database = FirebaseDatabase.getInstance()
+        dataRef =database.reference.child("Scores")
         dataRef.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if(snapshot.exists()){
@@ -56,7 +58,6 @@ class ResultActivity : AppCompatActivity() {
                     Toast.makeText(this@ResultActivity, "User Not Found", Toast.LENGTH_SHORT).show()
                 }
             }
-
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }

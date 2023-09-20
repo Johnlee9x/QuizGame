@@ -15,8 +15,29 @@
     </style>
     <style name="SignupTheme" parent="Theme.Material3.DayNight">
         <!-- Customize your light theme here. -->
-
         <item name="colorPrimary">@color/orange</item>
+        <item name="android:navigationBarColor">@color/orange</item>
+
+    </style>
+
+    <style name="SignInTheme" parent="Theme.Material3.DayNight">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimaryDark">@color/orange</item>
+        <item name="colorPrimary">@color/orange</item>
+        <item name="android:toolbarStyle">@color/orange</item>
+        <item name="android:navigationBarColor">@color/orange</item>
+    </style>
+
+    <style name="HomePageTheme" parent="Theme.Material3.DayNight">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">@color/orange</item>
+        <item name="android:navigationBarColor">@color/orange</item>
+
+    </style>
+    <style name="QuizTheme" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">@color/orange</item>
+        <item name="android:navigationBarColor">@color/orange</item>
 
     </style>
 

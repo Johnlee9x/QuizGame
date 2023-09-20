@@ -5,9 +5,7 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.quizgame.databinding.ActivityQuizPageBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -20,7 +18,7 @@ import com.google.firebase.database.ValueEventListener
 class QuizActivity : AppCompatActivity() {
 
     private lateinit var viewBinding: ActivityQuizPageBinding
-    private val database: FirebaseDatabase = FirebaseDatabase.getInstance()
+    private var database: FirebaseDatabase = FirebaseDatabase.getInstance()
     private var dbReference: DatabaseReference = database.reference.child("Questions")
     private lateinit var countDown: CountDownTimer
     var qtNum = 1
@@ -125,9 +123,7 @@ class QuizActivity : AppCompatActivity() {
     }
 
     private fun showQuestion(){
-
         refreshOption()
-
         dbReference.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 qttoTal = snapshot.childrenCount.toInt()
@@ -146,6 +142,7 @@ class QuizActivity : AppCompatActivity() {
                     viewBinding.txtQuestion.text = qtion
                 }
                 else{
+                    stopCntD()
                     val dialogMsg = AlertDialog.Builder(this@QuizActivity)
                     dialogMsg.setTitle("Quiz Game")
                     dialogMsg.setMessage("Finish the Quiz, see the result")
@@ -176,8 +173,7 @@ class QuizActivity : AppCompatActivity() {
         })
 
     }
-
-
+    
     private fun showAns(){
         when(crans){
             "a" -> viewBinding.txtA.setBackgroundColor(Color.GREEN)
@@ -187,9 +183,6 @@ class QuizActivity : AppCompatActivity() {
         }
 
     }
-
-
-
     fun disableClic(){
         viewBinding.txtA.isClickable = false
         viewBinding.txtB.isClickable = false
@@ -210,7 +203,6 @@ class QuizActivity : AppCompatActivity() {
         viewBinding.txtC.setBackgroundColor(Color.WHITE)
         viewBinding.txtD.setBackgroundColor(Color.WHITE)
     }
-
     private fun startCntD() {
         countDown = object : CountDownTimer(30000, 1000) {
             override fun onTick(tilFn: Long) {
@@ -227,7 +219,6 @@ class QuizActivity : AppCompatActivity() {
     private fun stopCntD(){
         countDown.cancel()
     }
-
     private fun getRecord(){
         user?.let {
             val userId = it.uid

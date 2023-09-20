@@ -27,17 +27,26 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
     fun signUpWithFirebase(email: String, password: String){
-        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener{task ->
-            if(task.isSuccessful){
-                Toast.makeText(this@SignUpActivity, "create successfully", Toast.LENGTH_SHORT).show()
-                finish()
-            }
-            else{
-                Toast.makeText(this@SignUpActivity, task.exception?.localizedMessage, Toast.LENGTH_SHORT).show()
+        if(email.isEmpty() || password.isEmpty()){
+            Toast.makeText(this@SignUpActivity, "Input Miss Match\n Try again", Toast.LENGTH_SHORT).show()
+        }
+        else if(email.endsWith("@gmail.com", false) && password.isNotBlank()) {
+            auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(this@SignUpActivity, "create successfully", Toast.LENGTH_SHORT)
+                        .show()
+                    finish()
+                } else {
+                    Toast.makeText(
+                        this@SignUpActivity,
+                        task.exception?.localizedMessage,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
         }
+        else{
+            Toast.makeText(this@SignUpActivity, "Email has to be ending with @gmail.com", Toast.LENGTH_SHORT).show()
+        }
     }
-
-
-
 }

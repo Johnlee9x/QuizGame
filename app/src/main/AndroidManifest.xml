@@ -17,25 +17,30 @@
         tools:targetApi="31">
         <activity
             android:name=".ResultActivity"
-            android:exported="false">
+            android:exported="false"
+            android:theme="@style/QuizTheme">
         </activity>
         <activity
             android:name=".QuizActivity"
             android:exported="false"
-            android:theme="@style/Theme.QuizGame">
+            android:theme="@style/QuizTheme">
         </activity>
         <activity
             android:name=".ForgetPasswordActivity"
             android:exported="false"
+            android:theme="@style/SignInTheme"
             android:parentActivityName=".SignInActivity">
 
         </activity>
         <activity
             android:name=".HomePageActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/SignInTheme"
+           />
         <activity
             android:name=".SignUpActivity"
             android:exported="false"
+            android:theme="@style/SignupTheme"
             android:parentActivityName=".SignInActivity">
         </activity>
         <activity
@@ -50,7 +55,7 @@
         <activity
             android:name=".SignInActivity"
             android:exported="false"
-            android:theme="@style/Theme.QuizGame">
+            android:theme="@style/SignInTheme">
         </activity>
 
     </application>

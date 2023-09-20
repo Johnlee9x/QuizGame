@@ -3,18 +3,18 @@
     android:shape="rectangle"
     >
     <!--mau nen khoi -->
-    <solid android:color="#FF5722"></solid>
-    <size android:height="5dp"></size>
-    <size android:width="5dp"></size>
+    <solid android:color="#FF5722"/>
+    <size android:height="1dp"/>
+    <size android:width="10dp"/>
 
     <!--corner bo goc-->
-    <corners android:topLeftRadius="100dp"
-        android:topRightRadius="100dp"></corners>
+    <corners android:topLeftRadius="20dp"
+        android:topRightRadius="20dp"/>
 
     <!--stroke to vien, chia vien-->
-    <stroke></stroke>
+    <stroke android:width="0.0dp"/>
     <!--can le noi dung nam tren khoi shape-->
-    <padding></padding>
+
 
     <!---->
 

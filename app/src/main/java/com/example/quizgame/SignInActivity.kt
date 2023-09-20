@@ -24,8 +24,8 @@ class SignInActivity : AppCompatActivity() {
     private lateinit var binding: SigninActivityBinding
 
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
-    lateinit var mGoogleSignInClient: GoogleSignInClient
-    val Req_Code: Int = 123
+    private lateinit var mGoogleSignInClient: GoogleSignInClient
+    private val Req_Code: Int = 123
     private lateinit var firebaseAuth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,9 +38,7 @@ class SignInActivity : AppCompatActivity() {
             val email = binding.edtEmailInputSignin.text.toString()
             val password = binding.edtSigninPasswordInput.text.toString()
             signInWithAccount(email, password)
-
         }
-
         binding.signInButton.setOnClickListener{
             signInGoogle()
         }
@@ -48,7 +46,6 @@ class SignInActivity : AppCompatActivity() {
         binding.txtSignup.setOnClickListener {
             val intent = Intent(this@SignInActivity, SignUpActivity::class.java)
             startActivity(intent)
-
         }
 
         binding.txtfgotpssw.setOnClickListener {
@@ -57,15 +54,22 @@ class SignInActivity : AppCompatActivity() {
             finish()
         }
     }
+
     private fun signInWithAccount(email: String, password: String){
-        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
-            if(task.isSuccessful){
-                val intent = Intent(this@SignInActivity, HomePageActivity::class.java)
-                startActivity(intent)
-                finish()
-            }
-            else{
-                Toast.makeText(this@SignInActivity, task.exception?.localizedMessage, Toast.LENGTH_SHORT).show()
+        if(email.isEmpty() || password.isEmpty()){
+            Toast.makeText(this@SignInActivity, "Input Missmatch", Toast.LENGTH_SHORT).show()
+        }
+        else{
+            auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+                if(task.isSuccessful){
+                    val intent = Intent(this@SignInActivity, HomePageActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+                else{
+                    Toast.makeText(this@SignInActivity, "Email do not register\n please click signUp button", Toast.LENGTH_LONG).show()
+
+                }
             }
         }
     }
@@ -75,13 +79,13 @@ class SignInActivity : AppCompatActivity() {
             .requestIdToken("170728334086-lcmhb51ehk0e345d6jgdn2903e4vhnq3.apps.googleusercontent.com")
             .requestEmail()
             .build()
-
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
         firebaseAuth = FirebaseAuth.getInstance()
         val signInIntent: Intent = mGoogleSignInClient.signInIntent
         startActivityForResult(signInIntent, Req_Code)
     }
-
+    // onActivityResult() function : this is where
+    // we provide the task and data for the Google Account
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == Req_Code) {
@@ -93,26 +97,16 @@ class SignInActivity : AppCompatActivity() {
         try {
             val account: GoogleSignInAccount? = completedTask.getResult(ApiException::class.java)
             if (account != null) {
-                UpdateUI(account)
+                val intent = Intent(this, HomePageActivity::class.java)
+                startActivity(intent)
+                finish()
             }
         } catch (e: ApiException) {
             Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show()
         }
     }
-
-
-    private fun UpdateUI(account: GoogleSignInAccount) {
-        val credential = GoogleAuthProvider.getCredential(account.idToken, null)
-        firebaseAuth.signInWithCredential(credential).addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                val intent = Intent(this, HomePageActivity::class.java)
-                startActivity(intent)
-                finish()
-            }
-        }
-    }
-
-    override fun onStart() {
+    //SignIn with the last google account
+    /*override fun onStart() {
         super.onStart()
         if (GoogleSignIn.getLastSignedInAccount(this) != null) {
             startActivity(
@@ -123,11 +117,11 @@ class SignInActivity : AppCompatActivity() {
             )
             finish()
         }
-    }
+    }*/
     private fun changeTextGg(){
         val txtGg = binding.signInButton.getChildAt(0) as TextView
-        txtGg.text = "Continue with google"
-        txtGg.textSize = 16F
+        txtGg.text = "CONTINUE WITH GOOGLE"
+        txtGg.textSize = 17F
         txtGg.setTextColor(Color.BLACK)
 
     }
